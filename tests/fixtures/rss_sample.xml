@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Agent Updates</title>
+    <item>
+      <title>Building workflows for agents with skills</title>
+      <link>https://example.com/agent-workflows?utm_source=newsletter</link>
+      <description>Agent workflows combine tools, memory, and evaluators.</description>
+      <pubDate>Mon, 01 Jun 2026 08:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
+

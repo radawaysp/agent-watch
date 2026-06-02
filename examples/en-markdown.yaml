@@ -1,0 +1,33 @@
+language: en
+
+keywords:
+  include:
+    - agent
+    - ai agent
+    - tool use
+    - agentic
+    - workflow
+
+sinks:
+  default:
+    type: markdown
+    output_dir: notes
+    filename_template: "{month}-agent-watch.md"
+
+llm:
+  provider: none
+  max_items_per_run: 10
+
+state:
+  path: data/state.sqlite
+
+sources:
+  - name: arXiv Agents
+    type: arxiv
+    query: 'cat:cs.AI AND (agent OR agents OR tool)'
+    limit: 20
+  - name: GitHub Agent Projects
+    type: github
+    query: 'ai-agent OR llm-agent OR agentic-ai stars:>100'
+    limit: 20
+

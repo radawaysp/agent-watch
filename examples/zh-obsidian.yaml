@@ -1,0 +1,48 @@
+language: zh
+
+keywords:
+  include:
+    - agent
+    - ai agent
+    - llm agent
+    - agentic
+    - 智能体
+    - 工具调用
+
+sinks:
+  default:
+    type: obsidian
+    output_dir: "${OBSIDIAN_VAULT_PATH}/技术学习/智能体/月度追踪"
+    filename_template: "{month}-agent-watch.md"
+
+schedule:
+  cadence: weekly
+  timezone: Asia/Shanghai
+
+llm:
+  provider: openai
+  model: gpt-5-mini
+  structured_output: true
+  max_items_per_run: 12
+
+state:
+  path: data/state.sqlite
+
+sources:
+  - name: OpenAI News
+    type: rss
+    url: https://openai.com/news/rss.xml
+    limit: 20
+  - name: arXiv AI Agents
+    type: arxiv
+    query: 'cat:cs.AI AND (agent OR agents OR tool)'
+    limit: 20
+  - name: GitHub Agent Projects
+    type: github
+    query: 'ai-agent OR llm-agent OR agentic-ai stars:>100'
+    limit: 20
+  - name: Hacker News Agent Signal
+    type: hackernews
+    query: AI agent
+    limit: 10
+
