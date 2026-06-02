@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
 authors = [
-  { name = "Agent Watch Contributors" }
+  { name = "radawaysp" }
 ]
 keywords = ["ai-agents", "markdown", "obsidian", "rss", "arxiv", "github"]
 classifiers = [
@@ -48,6 +48,12 @@ dev = [
 
 [project.scripts]
 agent-watch = "agent_watch.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/radawaysp/agent-watch"
+Repository = "https://github.com/radawaysp/agent-watch"
+Issues = "https://github.com/radawaysp/agent-watch/issues"
+Changelog = "https://github.com/radawaysp/agent-watch/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/agent_watch"]

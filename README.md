@@ -1,8 +1,20 @@
 # Agent Watch
 
-Agent Watch is a small CLI for tracking AI agent technology and industry updates. It collects source items, removes duplicates, ranks relevance, summarizes the most useful items, and writes a monthly Markdown report. Obsidian is supported as a preset, but the default architecture works with any Markdown folder.
+[![CI](https://github.com/radawaysp/agent-watch/actions/workflows/ci.yml/badge.svg)](https://github.com/radawaysp/agent-watch/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
 
-The project is designed for public reuse: personal paths live in environment variables, generated state is ignored by git, tests run without network access, and the LLM path falls back to a source-index style summary when structured generation fails.
+Agent Watch is an open-source Python CLI that helps maintainers track fast-moving AI agent ecosystem changes from RSS, arXiv, Semantic Scholar, GitHub, and community signals, then produce traceable Markdown reports.
+
+It is built for open-source maintainer workflows: every summary keeps its source URL, publication date, collection date, relevance confidence, and category, so maintainers can follow framework releases, research papers, repository activity, and product changes without losing evidence. Obsidian is supported as a preset, but the default output is plain Markdown.
+
+The project is designed for public reuse. Personal paths live in environment variables, generated state is ignored by git, tests run without network access, and the LLM path falls back to a source-index style summary when structured generation fails.
+
+## Why Maintainers Use It
+
+AI agent projects change quickly across papers, vendor announcements, framework repositories, and community discussions. Agent Watch reduces the manual tracking burden by turning those sources into a monthly, source-linked report that can be reviewed during issue triage, release planning, adapter maintenance, and project roadmap updates.
+
+This repository is also structured for maintainable automation. See [Maintainer Workflows](docs/maintainer-workflows.md) for practical PR review, issue triage, release validation, and regression-testing workflows.
 
 ## Quick Start
 
@@ -12,6 +24,22 @@ agent-watch init
 agent-watch update --config agent-watch.yaml --dry-run
 ```
 
+Example dry-run output:
+
+```markdown
+# 2026-06 AI Agent Technology and Industry Report
+
+## Monthly Read
+
+The most notable item in this run is 'Building workflows for agents with skills'.
+
+## Source Index
+
+| Title | Source | Published | Fetched | Confidence | URL |
+| --- | --- | --- | --- | --- | --- |
+| Building workflows for agents with skills | Fixture | 2026-06-01 | 2026-06-02 | high | https://example.com/agent-workflows |
+```
+
 For a first real run, copy `.env.example`, set `OPENAI_API_KEY`, and set `OBSIDIAN_VAULT_PATH` only if you use the Obsidian preset. Then run:
 
 ```powershell
@@ -19,6 +47,15 @@ agent-watch update --config agent-watch.yaml
 ```
 
 The default monthly output path is controlled by the sink configuration. A plain Markdown sink writes files like `notes/2026-06-agent-watch.md`; the Obsidian example writes into `${OBSIDIAN_VAULT_PATH}/技术学习/智能体/月度追踪`.
+
+## Project Readiness
+
+Agent Watch keeps generated notes, local SQLite state, and secrets out of git. The project includes CI, Dependabot, tests with local fixtures, source documentation, Obsidian setup notes, and a roadmap. For a quick tour of how the project is maintained, start here:
+
+- [Demo](docs/demo.md)
+- [Maintainer Workflows](docs/maintainer-workflows.md)
+- [Roadmap](ROADMAP.md)
+- [Changelog](CHANGELOG.md)
 
 ## CLI
 
@@ -82,3 +119,6 @@ python -m mypy src
 python -m pytest
 ```
 
+## Maintainer
+
+Agent Watch is maintained by `radawaysp`. The repository is intended to be public and verifiable on GitHub at `https://github.com/radawaysp/agent-watch`.
