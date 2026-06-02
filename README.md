@@ -61,12 +61,13 @@ Agent Watch keeps generated notes, local SQLite state, and secrets out of git. T
 
 ```powershell
 agent-watch init --output-dir .
+agent-watch doctor --config agent-watch.yaml
 agent-watch update --config agent-watch.yaml
 agent-watch update --config agent-watch.yaml --dry-run
 agent-watch synthesize-month --config agent-watch.yaml --month 2026-06
 ```
 
-`init` creates a starter config and editable templates. `update` fetches configured sources, deduplicates against `data/state.sqlite`, ranks items, summarizes them, and writes the monthly Markdown file. `synthesize-month` refreshes the report structure when you want a month file without fetching new items.
+`init` creates a starter config and editable templates. `doctor` checks local configuration, paths, templates, and optional environment variables without fetching sources or writing state. `update` fetches configured sources, deduplicates against `data/state.sqlite`, ranks items, summarizes them, and writes the monthly Markdown file. `synthesize-month` refreshes the report structure when you want a month file without fetching new items.
 
 ## Configuration Shape
 
@@ -114,6 +115,7 @@ Every summary keeps the title, original URL, source name, publication date, coll
 Run local checks before publishing changes:
 
 ```powershell
+agent-watch doctor --config agent-watch.yaml
 python -m ruff check .
 python -m mypy src
 python -m pytest

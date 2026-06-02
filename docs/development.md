@@ -13,14 +13,16 @@ The `llm` extra installs the OpenAI client. Tests do not require a real API key 
 ## Checks
 
 ```powershell
+agent-watch doctor --config agent-watch.yaml
 python -m ruff check .
 python -m mypy src
 python -m pytest
 ```
+
+Run `doctor` before the test suite when you are checking a local configuration. It performs no network requests and does not write notes or state, so it is safe to use while debugging examples, environment variables, and output paths.
 
 Source adapter tests should use local fixtures or HTTP mocks. Do not make CI depend on live external services.
 
 ## Release Notes
 
 Before tagging a release, run the full checks on Windows and Ubuntu through GitHub Actions. Also run `agent-watch init` in a temporary directory and inspect the generated config for personal paths or secrets.
-
