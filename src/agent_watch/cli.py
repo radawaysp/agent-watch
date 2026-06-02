@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated
@@ -68,6 +69,65 @@ def update(
     for summary in summaries:
         store.mark_seen(summary.item)
     typer.echo(f"Wrote {len(summaries)} items to {watch_config.output_path(target_month)}")
+
+
+@app.command()
+def doctor(
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path("agent-watch.yaml"),
+) -> None:
+    """Check local configuration without fetching sources or writing state."""
+
+    if not config.is_file():
+        typer.echo(f"Error: Config file not found: {config}")
+        raise typer.Exit(1)
+
+    try:
+        watch_config = load_config(config)
+    except Exception as exc:
+        typer.echo(f"Error: Could not load config: {exc}")
+        raise typer.Exit(1) from exc
+
+    errors: list[str] = []
+    warnings: list[str] = []
+    sink = watch_config.sinks.default
+
+    if sink.output_dir.exists() and not sink.output_dir.is_dir():
+        errors.append(f"Output path is not a directory: {sink.output_dir}")
+
+    state_parent = watch_config.state.path.parent
+    if state_parent.exists() and not state_parent.is_dir():
+        errors.append(f"State parent path is not a directory: {state_parent}")
+
+    if sink.template is not None:
+        template_path = Path(sink.template)
+        if not template_path.is_absolute():
+            template_path = config.parent / template_path
+        if not template_path.is_file():
+            errors.append(f"Template not found: {template_path}")
+
+    if watch_config.llm.provider == "openai" and not os.environ.get("OPENAI_API_KEY"):
+        warnings.append(
+            "OPENAI_API_KEY is not set; OpenAI summaries will use the built-in fallback."
+        )
+
+    for source in watch_config.sources:
+        if source.api_key_env and not os.environ.get(source.api_key_env):
+            warnings.append(
+                f"{source.api_key_env} is not set for source '{source.name}'."
+            )
+
+    for warning in warnings:
+        typer.echo(f"Warning: {warning}")
+    for error in errors:
+        typer.echo(f"Error: {error}")
+    if errors:
+        raise typer.Exit(1)
+
+    source_label = "source" if len(watch_config.sources) == 1 else "sources"
+    typer.echo(
+        f"Configuration OK: {len(watch_config.sources)} {source_label}, "
+        f"{sink.type} sink, state path {watch_config.state.path}"
+    )
 
 
 @app.command("synthesize-month")
