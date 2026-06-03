@@ -6,6 +6,14 @@ All notable changes to Agent Watch will be documented in this file.
 
 Added `agent-watch doctor`, a no-network configuration diagnostics command for checking local config files, output paths, templates, state path setup, and optional LLM environment warnings.
 
+Added per-source HTTP timeout, retry, backoff, and continue-on-error behavior so temporary failures in one source do not block successful sources from being collected.
+
+Changed `agent-watch update` to leave an existing monthly report untouched when there are no new items to write, preventing scheduled runs from overwriting a report with an empty update.
+
+Added Docker deployment documentation and a reusable Dockerfile for isolated Linux and cron-based deployments.
+
+Updated the scheduled GitHub Actions example to use `actions/checkout@v6` and `actions/setup-python@v6`.
+
 Improved local test discovery by adding the `src/` package path to pytest configuration, so `python -m pytest` works in a fresh checkout before editable installation.
 
 ## 0.1.0 - 2026-06-02

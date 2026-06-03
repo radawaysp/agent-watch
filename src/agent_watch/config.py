@@ -20,8 +20,12 @@ class SourceConfig(BaseModel):
     type: Literal["rss", "arxiv", "semantic_scholar", "github", "hackernews"]
     url: str | None = None
     query: str | None = None
-    limit: int = 20
+    limit: int = Field(default=20, gt=0)
     api_key_env: str | None = None
+    timeout_seconds: float = Field(default=20.0, gt=0)
+    retries: int = Field(default=0, ge=0)
+    retry_backoff_seconds: float = Field(default=1.0, ge=0)
+    continue_on_error: bool = True
 
 
 class SinkConfig(BaseModel):
@@ -105,4 +109,3 @@ def _expand_env(value: Any) -> Any:
     if isinstance(value, dict):
         return {key: _expand_env(item) for key, item in value.items()}
     return value
-
