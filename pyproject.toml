@@ -37,7 +37,7 @@ dependencies = [
 [project.optional-dependencies]
 llm = ["openai>=1.40.0"]
 dev = [
-  "mypy>=1.10.0",
+  "mypy>=2.1.0",
   "pytest>=8.2.0",
   "pytest-cov>=7.1.0",
   "respx>=0.23.1",
