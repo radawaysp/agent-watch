@@ -53,6 +53,7 @@ The default monthly output path is controlled by the sink configuration. A plain
 Agent Watch keeps generated notes, local SQLite state, and secrets out of git. The project includes CI, Dependabot, tests with local fixtures, source documentation, Obsidian setup notes, and a roadmap. For a quick tour of how the project is maintained, start here:
 
 - [Demo](docs/demo.md)
+- [Deployment](docs/deployment.md)
 - [Maintainer Workflows](docs/maintainer-workflows.md)
 - [Roadmap](ROADMAP.md)
 - [Changelog](CHANGELOG.md)
@@ -88,7 +89,7 @@ llm:
   model: gpt-5-mini
 ```
 
-Supported source types are `rss`, `arxiv`, `semantic_scholar`, `github`, and `hackernews`. Community sources such as Hacker News are treated as low-confidence signals and should not be cited as facts without a primary source.
+Supported source types are `rss`, `arxiv`, `semantic_scholar`, `github`, and `hackernews`. Community sources such as Hacker News are treated as low-confidence signals and should not be cited as facts without a primary source. Source adapters continue after temporary HTTP failures by default; see [Sources](docs/sources.md) for timeout, retry, and API key options.
 
 ## Scheduling
 
@@ -107,6 +108,8 @@ cron example:
 ```
 
 GitHub Actions can also run the CLI on a schedule. See `examples/github-actions-workflow.yml`.
+
+For isolated Linux deployments, build the included Dockerfile and mount a runtime directory at `/runtime`. See [Deployment](docs/deployment.md) for Docker and cron examples.
 
 ## Quality Baseline
 
