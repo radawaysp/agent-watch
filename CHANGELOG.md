@@ -12,6 +12,8 @@ Changed `agent-watch update` to leave an existing monthly report untouched when 
 
 Added Docker deployment documentation and a reusable Dockerfile for isolated Linux and cron-based deployments.
 
+Added offline fixture coverage for arXiv and Semantic Scholar adapters, including Semantic Scholar rate-limit reporting.
+
 Updated the scheduled GitHub Actions example to use `actions/checkout@v6` and `actions/setup-python@v6`.
 
 Improved local test discovery by adding the `src/` package path to pytest configuration, so `python -m pytest` works in a fresh checkout before editable installation.

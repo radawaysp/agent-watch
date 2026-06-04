@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>arXiv Query: agent tool use</title>
+  <entry>
+    <id>http://arxiv.org/abs/2606.00001v1</id>
+    <updated>2026-06-02T12:00:00Z</updated>
+    <published>2026-06-02T12:00:00Z</published>
+    <title>Evaluating Tool Use in AI Agents</title>
+    <summary>A benchmark for tool-using AI agents with reproducible tasks.</summary>
+    <link href="https://arxiv.org/abs/2606.00001" rel="alternate" type="text/html"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.00002v1</id>
+    <updated>2026-06-01T09:30:00Z</updated>
+    <published>2026-06-01T09:30:00Z</published>
+    <title>Planning Traces for Agentic Systems</title>
+    <summary>An analysis of planning traces in agentic AI systems.</summary>
+    <link href="https://arxiv.org/abs/2606.00002" rel="alternate" type="text/html"/>
+  </entry>
+</feed>

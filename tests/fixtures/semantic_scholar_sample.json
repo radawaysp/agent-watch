@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "paperId": "paper-1",
+      "title": "Traceable Evaluation for AI Agents",
+      "url": "https://www.semanticscholar.org/paper/paper-1",
+      "abstract": "A study of <b>traceable</b> evaluation for AI agents.",
+      "year": 2026,
+      "publicationDate": "2026-06-01",
+      "citationCount": 42
+    },
+    {
+      "paperId": "paper-2",
+      "title": "Paper Without URL",
+      "abstract": "This item should be skipped because it has no URL.",
+      "year": 2026,
+      "publicationDate": "2026-06-02",
+      "citationCount": 7
+    }
+  ]
+}
