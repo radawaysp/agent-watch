@@ -4,6 +4,8 @@ All notable changes to Agent Watch will be documented in this file.
 
 ## Unreleased
 
+## 0.1.1 - 2026-06-05
+
 Added `agent-watch doctor`, a no-network configuration diagnostics command for checking local config files, output paths, templates, state path setup, and optional LLM environment warnings.
 
 Added per-source HTTP timeout, retry, backoff, and continue-on-error behavior so temporary failures in one source do not block successful sources from being collected.
